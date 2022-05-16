@@ -1,0 +1,12 @@
+body {
+  background-color:grey ;
+}
+#compteur {
+  background-color: blue;
+  padding: 10px;
+  font-size: 20px;
+  color:white;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+}

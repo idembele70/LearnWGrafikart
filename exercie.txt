@@ -1,0 +1,34 @@
+1 - creer un tableau de chaine de caractere(string)
+2 - creer un objet avec deux clés
+3 - creer un objet avec deux clés et l'une d'elle est facultative
+4 - creer un objet avec une infinite de clés de chaine de caractere
+5 - creer un document queryselector et force son type en button variant 1
+6 - creer un document queryselector et force son type en button variant 2
+7 - creer une variable de type nombre ou chaine de caractere
+8 - creer deux objet avec le meme type
+9 - recuperer les clé d'un type : Alias et Generics : 9.38
+10 - creer un fonction qui adapte le type de params et de retour en fonction
+    de son params
+11 - creer un tableau de chaine de caractere et nombre
+12 - creer une fonction qui retourne la longueur de l'argument: Alias et Generics : 8.35
+                LES CLASSES EN TYPESCRIPT 9:58
+13 - creer fonction qui prend en parametre un tableau de type T et le tableau n'est pas modifiable
+14 - creer une classe avec une cle privée
+15 - creer une methode qui affiche la valeur de a
+16 - creer une classe avec une clé proteger
+17 - creer une clé prive v2
+18 - creer un constructeur avec une parametre
+19 - creer une classe qui a un type il a une parametre prive qui est un tableau de son type
+    ne pas oublie d'utiliser une methode pour la propriete prive:8.05
+20 - utiliser les deux facons d'instancier la classe
+                Type ou interface
+21 - Créer une cle de l'objet window nommé googleAnalytics
+22 - Créer une class qui implemente une interface avec X et Y
+                Tuple & Enum
+23 - Créer une fonction qui prend un parametre et il verifie si ce paramtere est de type 
+    htmlinputelement alors il modifie la value du parametre
+24 - Créer des objets avec des types forcer faire la V1 et V2 2.53
+25 - Créer un tableau de longueur 2 4.47
+26 - Créer deux tableau qui sont de taille 2 puis creer une function qui aura deux parametre
+    qui a 2 parametre de type tableau et il retourne les deux tableau fusioner
+27 - Créer un enum 13.00  

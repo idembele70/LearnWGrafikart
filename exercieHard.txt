@@ -1,0 +1,1 @@
+1 - creer un compteur qui s'incremente d'un en un
