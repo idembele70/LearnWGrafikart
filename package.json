@@ -1,5 +1,8 @@
 {
   "devDependencies": {
     "typescript": "^4.6.4"
+  },
+  "dependencies": {
+    "scroll-to": "^0.0.2"
   }
 }

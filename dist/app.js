@@ -1,5 +1,14 @@
 "use strict";
-function loveFunc(flower1, flower2) {
-    return ((flower1 % 2 !== 0 && flower2 % 2 === 0) ||
-        (flower1 % 2 === 0 && flower2 % 2 !== 0));
+//  Utiliatry types
+class Theme {
+    darkMode = () => {
+        return true;
+    };
+    lightMode = () => {
+        return false;
+    };
+    nfsw = () => {
+        return "nfsw";
+    };
+    env = "Hello World";
 }
