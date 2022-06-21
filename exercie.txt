@@ -23,7 +23,7 @@
 20 - utiliser les deux facons d'instancier la classe ✅
                 Type ou interface
 21 - Créer une cle de l'objet window nommé googleAnalytics✅
-22 - Créer une class qui implemente une interface avec X et Y
+22 - Créer une class qui implemente une interface avec X et Y ✅
                 Tuple & Enum
 23 - Créer une fonction qui prend un parametre et il verifie si ce paramtere est de type 
     htmlinputelement alors il modifie la value du parametre ✅
@@ -44,8 +44,8 @@
                 Types utilitaires
 33 - Creer une function qui a un paramètre qui est un objet il verifie 
     si "nager" est dans le paramétre il retourne une classe nommé Poisson ou
-    bien il retourne une classe nommé Chat et bien verifie si la valeur retourner
-     est uniquement de type poisson ou chat ! : 2.55
+    si c'est "sauter" qui est dans le paramètre il retourne une classe nommé Chat 
+    et bien verifie si la valeur retourner est uniquement de type poisson ou chat ! : 2.55
 34 - refaire la 33 en utilisant des type 3.55
 35 - Créer deux classe avec une methode nommé cri l'un retourne un string l'autre un boolean
     puis créer un type qui va verifier le retour de la methode et il affiche le type

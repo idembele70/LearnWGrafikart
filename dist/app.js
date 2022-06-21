@@ -1,14 +1,8 @@
 "use strict";
-//  Utiliatry types
+// Utilitary Types
 class Theme {
-    darkMode = () => {
-        return true;
-    };
-    lightMode = () => {
-        return false;
-    };
-    nfsw = () => {
-        return "nfsw";
-    };
+    darkmode = () => true;
+    lightmode = () => false;
+    nfsw = () => false;
     env = "Hello World";
 }

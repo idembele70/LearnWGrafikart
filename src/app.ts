@@ -1,19 +1,13 @@
-//  Utiliatry types
+// Utilitary Types
 class Theme {
-  darkMode = () => {
-    return true;
-  };
-  lightMode = () => {
-    return false;
-  };
-  nfsw = () => {
-    return "nfsw";
-  };
+  darkmode = () => true;
+  lightmode = () => false;
+  nfsw = () => false;
   env = "Hello World";
 }
 
-type myType<T> = {
-  [key in keyof T as T[key] extends () => boolean ? key : never]: T[key];
+type keepItUp<T> = {
+  [k in keyof T as T[k] extends () => boolean ? k : never]: T[k];
 };
 
-type A = myType<Theme>;
+type A = keepItUp<Theme>;

@@ -4,7 +4,9 @@
     "target": "ESnext",
     "outDir": "dist",
     "noEmitOnError": true,
-    "strict": true
+    "strict": true,
+    "declaration": true
   },
-  "files": ["src/app.ts"]
+  "files": ["src/app.ts"],
+  "include": ["src/types/**/*"]
 }
