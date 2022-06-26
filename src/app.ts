@@ -1,13 +1,14 @@
 // Utilitary Types
-class Theme {
+
+class Feaures {
   darkmode = () => true;
   lightmode = () => false;
   nfsw = () => false;
   env = "Hello World";
 }
 
-type keepItUp<T> = {
-  [k in keyof T as T[k] extends () => boolean ? k : never]: T[k];
+type AZ<T> = {
+  [K in keyof T as T[K] extends () => boolean ? K : never]: T[K];
 };
 
-type A = keepItUp<Theme>;
+type B = AZ<Feaures>;

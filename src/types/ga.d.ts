@@ -1,10 +1,11 @@
 declare module "scroll-to" {
-  export function scrollTo(
+  export const scrollTo: (
     x: number,
     y: number,
     options: {
       ease?: string;
       duration?: number;
     }
-  ): void;
+  ) => void;
+  export default scrollTo;
 }
