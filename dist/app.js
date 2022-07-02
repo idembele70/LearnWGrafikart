@@ -1,8 +1,10 @@
 "use strict";
 // Utilitary Types
-class Theme {
-    darkmode = () => true;
-    lightmode = () => false;
-    nfsw = () => false;
+class FeatureFlags {
+    darktheme = () => true;
+    lighttheme = () => false;
+    nfsw() {
+        return "false";
+    }
     env = "Hello World";
 }

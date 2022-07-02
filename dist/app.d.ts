@@ -1,10 +1,10 @@
-declare class Theme {
-    darkmode: () => boolean;
-    lightmode: () => boolean;
-    nfsw: () => boolean;
+declare class FeatureFlags {
+    darktheme: () => boolean;
+    lighttheme: () => boolean;
+    nfsw(): string;
     env: string;
 }
-declare type keepItUp<T> = {
-    [k in keyof T as T[k] extends () => boolean ? k : never]: T[k];
+declare type OptionsFlag<T> = {
+    [K in keyof T as T[K] extends () => boolean ? `get${Capitalize<K & string>}` : never]: T[K];
 };
-declare type A = keepItUp<Theme>;
+declare type A = OptionsFlag<FeatureFlags>;

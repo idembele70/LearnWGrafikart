@@ -44,19 +44,19 @@
                 Types utilitaires
 33 - Creer une function qui a un paramètre qui est un objet il verifie 
     si "nager" est dans le paramétre il retourne une classe nommé Poisson ou
-    si c'est "sauter" qui est dans le paramètre il retourne une classe nommé Chat 
+    si c'est "sauter" qui est dans le paramètre il retourne une classe nommé Chat ✅
     et bien verifie si la valeur retourner est uniquement de type poisson ou chat ! : 2.55 ✅
 34 - refaire la 33 en utilisant des type 3.55✅
 35 - Créer deux classe avec une methode nommé cri l'un retourne un string l'autre un boolean
     puis créer un type qui va verifier le retour de la methode et il affiche le type
-    de retour si la methode existe et enfin creer deux type l'un recevra la premiere classe et l'autre
+    de retour si la methode existe et enfin creer deux type l'un recevra la premiere classe et l'autre ❌
     le second : 5.46✅
 36 - Créer un type qui recuperer les nom des methods d'une classe et defini leur type en boolean uniquement 7.34 ✅
 37 - Ensuite la 36 en rendant les type optionnelle!✅
 38 - mettre la 36 en readOnly✅
-39 - ajouter une variable nommé env de type string à la classe
+39 - ajouter une variable nommé env de type string à la classe✅
 40 - ajouter devant tout les key de la 36 get et verifie si la retour du key n'est pas un boolean alors
-le mettre sur never 9.58
-41 - exclure la variable env qui est de type string
-42 - faire la 40 mettant la premiere lettre de key en majuscule
-43 - faire la 42 mais cette fois-ci on doit retourne le type du retour si il etends d'une methode qui retourne un boolean 14.08
+le mettre sur never 9.58✅
+41 - exclure la variable env qui est de type string✅
+42 - faire la 40 mettant la premiere lettre de key en majuscule✅
+43 - cette fois-ci on ne doit retourner la clé du mapped type si il etends pas d'une methode qui retourne un boolean 14.08❌
