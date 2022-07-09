@@ -1,17 +1,16 @@
-// Utilitary Types
-
-class FeatureFlags {
-  darktheme = () => true;
-  lighttheme = () => false;
-  nfsw() {
-    return "false";
-  }
-  env = "Hello World";
+// type challenges
+interface Todo {
+  title: string;
+  description: string;
+  completed: boolean;
 }
-
-type OptionsFlag<T> = {
-  [K in keyof T as T[K] extends () => boolean
-    ? `get${Capitalize<K & string>}`
-    : never]: T[K];
+type MyPick<T extends Record<string, any>, K extends string> = {
+  [key in K]: T[key];
 };
-type A = OptionsFlag<FeatureFlags>;
+
+type TodoPreview = MyPick<Todo, "title" | "completed">;
+
+const todo: TodoPreview = {
+  title: "Clean room",
+  completed: false,
+};
