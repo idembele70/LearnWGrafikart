@@ -1,16 +1,12 @@
 // type challenges
-interface Todo {
-  title: string;
-  description: string;
-  completed: boolean;
-}
-type MyPick<T extends Record<string, any>, K extends string> = {
-  [key in K]: T[key];
-};
-
-type TodoPreview = MyPick<Todo, "title" | "completed">;
-
-const todo: TodoPreview = {
-  title: "Clean room",
-  completed: false,
-};
+type tesla = ["tesla", "model 3", "model X", "model Y"];
+type spaceX = [
+  "FALCON 9",
+  "FALCON HEAVY",
+  "DRAGON",
+  "STARSHIP",
+  "HUMAN SPACEFLIGHT"
+];
+type Length<T extends readonly any[]> = T["length"];
+type teslaLength = Length<tesla>; // expected 4
+type spaceXLength = Length<spaceX>; // expected 5
