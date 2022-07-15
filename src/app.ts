@@ -1,8 +1,16 @@
 // type challenges
-const foo = (arg1: string, arg2: number): void => {};
-type MyParameters<T extends Function> = T extends (
-  ...args: infer ArgT
-) => unknown
-  ? ArgT
-  : [];
-type FunctionParamsType = MyParameters<typeof foo>; // [arg1: string, arg2: number]
+interface Todo {
+  title: string;
+  description: string;
+}
+type MyReadonly<T> = {
+  readonly [Key in keyof T]: T[Key];
+};
+
+const todo: MyReadonly<Todo> = {
+  title: "Hey",
+  description: "foobar",
+};
+
+todo.title = "Hello"; // Error: cannot reassign a readonly property
+todo.description = "barFoo"; // Error: cannot reassign a readonly property
