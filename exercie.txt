@@ -49,7 +49,7 @@
 34 - refaire la 33 en utilisant des type 3.55✅
 35 - Créer deux classe avec une methode nommé cri l'un retourne un string l'autre un boolean
     puis créer un type qui va verifier le retour de la methode et il affiche le type
-    de retour si la methode existe et enfin creer deux type l'un recevra la premiere classe et l'autre ❌
+    de retour si la methode existe et enfin creer deux type l'un recevra la premiere classe et l'autre 
     le second : 5.46✅
 36 - Créer un type qui recuperer les nom des methods d'une classe et defini leur type en boolean uniquement 7.34 ✅
 37 - Ensuite la 36 en rendant les type optionnelle!✅
@@ -59,4 +59,4 @@
 le mettre sur never 9.58✅
 41 - exclure la variable env qui est de type string✅
 42 - faire la 40 mettant la premiere lettre de key en majuscule✅
-43 - cette fois-ci on ne doit retourner la clé du mapped type si il etends pas d'une methode qui retourne un boolean 14.08❌
+43 - cette fois-ci on ne doit retourner la clé du mapped type si il etends pas d'une methode qui retourne un boolean 14.08✅

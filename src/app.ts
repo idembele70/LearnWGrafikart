@@ -1,12 +1,7 @@
 // type challenges
 
-const fn = (v: boolean) => {
-  if (v) return 1;
-  else return 2;
-};
+type MyParameters<T> = T extends (...args: infer R) => any ? R : never;
 
-type MyReturnType<T extends Function> = T extends (arg: any) => infer R
-  ? R
-  : never;
+const foo = (arg1: string, arg2: number): void => {};
 
-type a = MyReturnType<typeof fn>; // should be "1 | 2"
+type FunctionParamsType = MyParameters<typeof foo>; // [arg1: string, arg2: number]
