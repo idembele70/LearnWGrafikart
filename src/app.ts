@@ -7,12 +7,27 @@ type Equal<T, U> = <V>() => (V extends T ? 1 : 2) extends <V>() => V extends U
 type Expect<T extends true> = T;
 
 // Exercice
-type arr1 = ["a", "b", "c", "d"];
-type arr2 = [3, 2, 1];
+interface Todo {
+  title: string;
+  description: string;
+  completed: boolean;
+}
+type MyExclude<T, U> = T extends U ? never : T;
+type MyOmit<T, U extends keyof T> = {
+  [Key in MyExclude<keyof T, U>]: T[Key];
+};
+type MyPick<T, U extends keyof T> = {
+  [Key in keyof T as Key extends U ? Key : never]: T[Key];
+};
+type MyReadonly2<T, K extends keyof T = keyof T> = Readonly<MyPick<T, K>> &
+  MyOmit<T, K>;
 
-type Pop<T extends any[]> = T extends [...infer TPop, PropertyKey]
-  ? TPop
-  : never;
+const todo: MyReadonly2<Todo, "title" | "description"> = {
+  title: "Hey",
+  description: "foobar",
+  completed: false,
+};
 
-type re1 = Pop<arr1>; // expected to be ['a', 'b', 'c']
-type re2 = Pop<arr2>; // expected to be [3, 2]
+todo.title = "Hello"; // Error: cannot reassign a readonly property
+todo.description = "barFoo"; // Error: cannot reassign a readonly property
+todo.completed = true; // OK
