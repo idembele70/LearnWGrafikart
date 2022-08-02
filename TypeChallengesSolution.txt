@@ -2,3 +2,6 @@
  - Length of Tuple : https://youtu.be/N5cqN4BRirs?t=567
  - Includes : https://github.com/type-challenges/type-challenges/issues/12935
  - Omit : https://github.com/type-challenges/type-challenges/issues/12941
+ - DeepReadonly : https://github.com/type-challenges/type-challenges/issues/13912
+ - Chainable Options : https://github.com/type-challenges/type-challenges/issues/13518
+ - Last of Array : https://github.com/type-challenges/type-challenges/issues/13923
