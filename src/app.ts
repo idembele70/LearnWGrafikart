@@ -8,12 +8,10 @@ type Expect<T extends true> = T;
 
 // Exercice
 
-type arr1 = ["a", "b", "c"];
-type arr2 = [3, 2, 1];
+const fn = (v: boolean) => {
+  if (v) return 1;
+  else return 2;
+};
+type MyReturnType<T> = T extends (...args: any[]) => infer RT ? RT : never;
 
-type DontUseAny = PropertyKey | object;
-
-type Last<T extends DontUseAny[]> = [DontUseAny, ...T][T["length"]];
-
-type tail1 = Last<arr1>; // expected to be 'c'
-type tail2 = Last<arr2>; // expected to be 1
+type a = MyReturnType<typeof fn>; // should be "1 | 2"
