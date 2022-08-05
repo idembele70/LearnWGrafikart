@@ -8,10 +8,25 @@ type Expect<T extends true> = T;
 
 // Exercice
 
-const fn = (v: boolean) => {
-  if (v) return 1;
-  else return 2;
+type X = {
+  x: {
+    a: 1;
+    b: "hi";
+  };
+  y: "hey";
 };
-type MyReturnType<T> = T extends (...args: any[]) => infer RT ? RT : never;
 
-type a = MyReturnType<typeof fn>; // should be "1 | 2"
+type Expected = {
+  readonly x: {
+    readonly a: 1;
+    readonly b: "hi";
+  };
+  readonly y: "hey";
+};
+type DeepReadonly<T> = keyof T extends never
+  ? T
+  : {
+      readonly [Key in keyof T]: DeepReadonly<T[Key]>;
+    };
+
+type Todo = DeepReadonly<X>; // should be same as `Expected`
