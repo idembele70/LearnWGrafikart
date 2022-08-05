@@ -5,3 +5,5 @@
  - DeepReadonly : https://github.com/type-challenges/type-challenges/issues/13912
  - Chainable Options : https://github.com/type-challenges/type-challenges/issues/13518
  - Last of Array : https://github.com/type-challenges/type-challenges/issues/13923
+ - Capitalize : https://github.com/type-challenges/type-challenges/issues/14009
+ - Append To object : https://ghaiklor.github.io/type-challenges-solutions/en/medium-append-to-object.html

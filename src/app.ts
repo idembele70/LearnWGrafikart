@@ -8,25 +8,9 @@ type Expect<T extends true> = T;
 
 // Exercice
 
-type X = {
-  x: {
-    a: 1;
-    b: "hi";
-  };
-  y: "hey";
-};
+type Test = "123";
+type StringToUnion<S extends string> = S extends `${infer Head}${infer Tail}`
+  ? Head | StringToUnion<Tail>
+  : never;
 
-type Expected = {
-  readonly x: {
-    readonly a: 1;
-    readonly b: "hi";
-  };
-  readonly y: "hey";
-};
-type DeepReadonly<T> = keyof T extends never
-  ? T
-  : {
-      readonly [Key in keyof T]: DeepReadonly<T[Key]>;
-    };
-
-type Todo = DeepReadonly<X>; // should be same as `Expected`
+type Result = StringToUnion<Test>; // expected to be "1" | "2" | "3"
