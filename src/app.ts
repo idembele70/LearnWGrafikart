@@ -8,9 +8,8 @@ type Expect<T extends true> = T;
 
 // Exercice
 
-type Test = "123";
-type StringToUnion<S extends string> = S extends `${infer Head}${infer Tail}`
-  ? Head | StringToUnion<Tail>
-  : never;
+type Arr = ["1", "2", "3"];
 
-type Result = StringToUnion<Test>; // expected to be "1" | "2" | "3"
+type TupleToUnion<T extends (PropertyKey | boolean)[]> = T[number];
+
+type Test = TupleToUnion<Arr>; // expected to be '1' | '2' | '3'
