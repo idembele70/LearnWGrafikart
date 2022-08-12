@@ -7,9 +7,20 @@ type Equal<T, U> = <V>() => (V extends T ? 1 : 2) extends <V>() => V extends U
 type Expect<T extends true> = T;
 
 // Exercice
+type Diff<O, O1> = Omit<O, keyof O1> & Omit<O1, keyof O>;
 
-type Arr = ["1", "2", "3"];
-
-type TupleToUnion<T extends (PropertyKey | boolean)[]> = T[number];
-
-type Test = TupleToUnion<Arr>; // expected to be '1' | '2' | '3'
+type Foo = {
+  name: string;
+  age: string;
+};
+type Bar = {
+  name: string;
+  age: string;
+  gender: number;
+};
+type Coo = {
+  name: string;
+  gender: number;
+};
+type A = Diff<Bar, Foo>;
+type B = Diff<Foo, Coo>;
