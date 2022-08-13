@@ -7,20 +7,14 @@ type Equal<T, U> = <V>() => (V extends T ? 1 : 2) extends <V>() => V extends U
 type Expect<T extends true> = T;
 
 // Exercice
-type Diff<O, O1> = Omit<O, keyof O1> & Omit<O1, keyof O>;
+type Falsy = 0 | false | [] | "";
+type IsTrue<T> = T extends Falsy ? false : keyof T extends never ? false : true;
 
-type Foo = {
-  name: string;
-  age: string;
-};
-type Bar = {
-  name: string;
-  age: string;
-  gender: number;
-};
-type Coo = {
-  name: string;
-  gender: number;
-};
-type A = Diff<Bar, Foo>;
-type B = Diff<Foo, Coo>;
+type AnyOf<T extends readonly any[]> = T extends [infer First, ...infer Rest]
+  ? IsTrue<First> extends true
+    ? true
+    : AnyOf<Rest>
+  : false;
+
+type Sample1 = AnyOf<[1, "", false, [], {}]>; // expected to be true.
+type Sample2 = AnyOf<[0, "", false, [], {}]>; // expected to be false.
