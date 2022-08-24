@@ -8,8 +8,11 @@ type Expect<T extends true> = T;
 
 // Exercice
 
-type Trim<S extends string> = S extends `${" "}${infer Middle}${" "}`
-  ? Trim<Middle>
-  : S;
+type LengthOfString<
+  S extends string,
+  P extends string[] = []
+> = S extends `${infer First}${infer Rest}`
+  ? LengthOfString<Rest, [...P, First]>
+  : P["length"];
 
-type trimmed = Trim<"  Hello World  ">; // expected to be 'Hello World'
+type A = LengthOfString<"kumiko">; // 6
