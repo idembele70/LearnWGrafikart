@@ -8,10 +8,15 @@ type Expect<T extends true> = T;
 
 // Exercice
 
-type KebabCase<S extends string, isFirst = true> = S extends `${infer First}${infer Rest}` ?
+type KebabCase<
+  S extends string,
+  isFirst = true
+> = S extends `${infer First}${infer Rest}`
+  ? `${First extends Uppercase<First>
+      ? isFirst extends true
+        ? ""
+        : "-"
+      : ""}${Lowercase<First>}${KebabCase<Rest, false>}`
+  : S;
 
-First extends Uppercase<First> ? isFirst extends true ? First : `-${Lowercase<First>}` : First
-
-
-type kebab = KebabCase<"FooBarBaz"> // expected foo-bar-baz
-
+type kebab = KebabCase<"FooBarBaz">; // expected foo-bar-baz
