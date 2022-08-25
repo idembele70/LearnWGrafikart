@@ -8,11 +8,10 @@ type Expect<T extends true> = T;
 
 // Exercice
 
-type LengthOfString<
-  S extends string,
-  P extends string[] = []
-> = S extends `${infer First}${infer Rest}`
-  ? LengthOfString<Rest, [...P, First]>
-  : P["length"];
+type KebabCase<S extends string, isFirst = true> = S extends `${infer First}${infer Rest}` ?
 
-type A = LengthOfString<"kumiko">; // 6
+First extends Uppercase<First> ? isFirst extends true ? First : `-${Lowercase<First>}` : First
+
+
+type kebab = KebabCase<"FooBarBaz"> // expected foo-bar-baz
+
