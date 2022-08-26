@@ -8,15 +8,23 @@ type Expect<T extends true> = T;
 
 // Exercice
 
-type KebabCase<
-  S extends string,
-  isFirst = true
-> = S extends `${infer First}${infer Rest}`
-  ? `${First extends Uppercase<First>
-      ? isFirst extends true
-        ? ""
-        : "-"
-      : ""}${Lowercase<First>}${KebabCase<Rest, false>}`
-  : S;
+type PString1 = "";
+type PString2 = "+85%";
+type PString3 = "-85%";
+type PString4 = "85%";
+type PString5 = "85";
 
-type kebab = KebabCase<"FooBarBaz">; // expected foo-bar-baz
+type PlusorMinus = "-" | "+"
+type PercentageParser<S extends string> = S extends `${infer Head}${infer Rest}`
+  ?
+  Head extends PlusorMinus ?
+  Rest extends `${infer Heads}%` ?
+  [Head,Heads,"%"]:
+  [Head,Heads,""]
+  : ["","",""];
+
+type R1 = PercentageParser<PString1>; // expected ['', '', '']
+type R2 = PercentageParser<PString2>; // expected ["+", "85", "%"]
+type R3 = PercentageParser<PString3>; // expected ["-", "85", "%"]
+type R4 = PercentageParser<PString4>; // expected ["", "85", "%"]
+type R5 = PercentageParser<PString5>; // expected ["", "85", ""]
