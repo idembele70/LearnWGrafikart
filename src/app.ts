@@ -14,14 +14,12 @@ type PString3 = "-85%";
 type PString4 = "85%";
 type PString5 = "85";
 
-type PlusorMinus = "-" | "+"
+type PlusorMinus = "-" | "+";
 type PercentageParser<S extends string> = S extends `${infer Head}${infer Rest}`
-  ?
-  Head extends PlusorMinus ?
-  Rest extends `${infer Heads}%` ?
-  [Head,Heads,"%"]:
-  [Head,Heads,""]
-  : ["","",""];
+  ? Head extends PlusorMinus
+    ? [Head, ...(Rest extends `${infer Firsts}%` ? [Firsts, "%"] : [Rest, ""])]
+    : ["", ...(S extends `${infer Firsts}%` ? [Firsts, "%"] : [S, ""])]
+  : ["", "", ""];
 
 type R1 = PercentageParser<PString1>; // expected ['', '', '']
 type R2 = PercentageParser<PString2>; // expected ["+", "85", "%"]
