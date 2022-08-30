@@ -8,10 +8,6 @@ type Expect<T extends true> = T;
 
 // Exercice
 
-type MinusOne<T, A extends any[] = []> = A["length"] extends T
-  ? A extends [any, ...infer L]
-    ? L["length"]
-    : 0
-  : MinusOne<T, [...A, 1]>;
+type Concat<T extends any[], U extends any[]> = [...T, ...U];
 
-type B = MinusOne<12>;
+type Result = Concat<[1], [2]>; // expected to be [1, 2]
