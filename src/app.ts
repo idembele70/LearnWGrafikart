@@ -7,7 +7,12 @@ type Equal<T, U> = <V>() => (V extends T ? 1 : 2) extends <V>() => V extends U
 type Expect<T extends true> = T;
 
 // Exercice
+type arr1 = ["a", "b", "c"];
+type arr2 = [3, 2, 1];
 
-type Concat<T extends any[], U extends any[]> = [...T, ...U];
+type Last<T extends any[]> = T extends [...any[], infer LastEl]
+  ? LastEl
+  : never;
 
-type Result = Concat<[1], [2]>; // expected to be [1, 2]
+type tail1 = Last<arr1>; // expected to be 'c'
+type tail2 = Last<arr2>; // expected to be 1
