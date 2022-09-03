@@ -7,12 +7,11 @@ type Equal<T, U> = <V>() => (V extends T ? 1 : 2) extends <V>() => V extends U
 type Expect<T extends true> = T;
 
 // Exercice
-type arr1 = ["a", "b", "c"];
-type arr2 = [3, 2, 1];
 
-type Last<T extends any[]> = T extends [...any[], infer LastEl]
-  ? LastEl
-  : never;
+type Permutation<T, C = T> = [T] extends [never]
+  ? []
+  : C extends infer A
+  ? [A, ...Permutation<Exclude<T, C>>]
+  : [];
 
-type tail1 = Last<arr1>; // expected to be 'c'
-type tail2 = Last<arr2>; // expected to be 1
+type perm = Permutation<"A" | "B" | "C">; // ['A', 'B', 'C'] | ['A', 'C', 'B'] | ['B', 'A', 'C'] | ['B', 'C', 'A'] | ['C', 'A', 'B'] | ['C', 'B', 'A']
