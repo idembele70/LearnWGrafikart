@@ -8,10 +8,11 @@ type Expect<T extends true> = T;
 
 // Exercice
 
-type Permutation<T, C = T> = [T] extends [never]
-  ? []
-  : C extends infer A
-  ? [A, ...Permutation<Exclude<T, C>>]
-  : [];
+type LengthOfString<
+  S extends string,
+  P extends any[] = []
+> = S extends `${infer First}${infer Rest}`
+  ? LengthOfString<Rest, [...P, First]>
+  : P["length"];
 
-type perm = Permutation<"A" | "B" | "C">; // ['A', 'B', 'C'] | ['A', 'C', 'B'] | ['B', 'A', 'C'] | ['B', 'C', 'A'] | ['C', 'A', 'B'] | ['C', 'B', 'A']
+type A = LengthOfString<"ikd">;
