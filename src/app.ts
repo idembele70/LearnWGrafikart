@@ -8,24 +8,22 @@ type Expect<T extends true> = T;
 
 // Exercice
 
-interface User {
-  name?: string;
-  age?: number;
-  address?: string;
-}
+type FlattenOnce<T> = T extends [infer Head, ...infer Tail]
+  ? Head extends unknown[]
+    ? [...Head, ...FlattenOnce<Tail>]
+    : [Head, ...FlattenOnce<Tail>]
+  : [];
 
-type Merge<O> = {
-  [Key in keyof O]: O[Key];
-};
-type MyExclude<T, U> = T extends U ? never : T;
-type RequiredByKeys<O, K> = Merge<
-  {
-    [Key in K as Key extends keyof O ? Key : never]: Key extends keyof O
-      ? MyExclude<O[Key], undefined>
-      : never;
-  } & {
-    [Key in Exclude<keyof O, K>]?: O[Key];
-  }
->;
+type FlattenDepth<
+  T extends any[],
+  N extends number = 1,
+  Count extends any[] = []
+> = Count["length"] extends N
+  ? T
+  : FlattenOnce<T> extends T
+  ? T
+  : FlattenDepth<FlattenOnce<T>, N, [...Count, 1]>;
 
-type UserRequiredName = RequiredByKeys<User, "name">; // { name: string; age?: number; address?: string }
+type a = FlattenDepth<[1, 2, [3, 4], [[[5]]]], 2>; // [1, 2, 3, 4, [5]]. flattern 2 times
+type b = FlattenDepth<[1, 2, [3, 4], [[[5]]]]>; // [1, 2, 3, 4, [[5]]]. Depth defaults to be 1
+type c = FlattenDepth<[1, 2, 3, 4]>;
