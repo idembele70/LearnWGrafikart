@@ -8,22 +8,8 @@ type Expect<T extends true> = T;
 
 // Exercice
 
-type FlattenOnce<T> = T extends [infer Head, ...infer Tail]
-  ? Head extends unknown[]
-    ? [...Head, ...FlattenOnce<Tail>]
-    : [Head, ...FlattenOnce<Tail>]
-  : [];
+type IsUnion<T, C = T> = T extends C ? ([C] extends [T] ? "in" : true) : false;
 
-type FlattenDepth<
-  T extends any[],
-  N extends number = 1,
-  Count extends any[] = []
-> = Count["length"] extends N
-  ? T
-  : FlattenOnce<T> extends T
-  ? T
-  : FlattenDepth<FlattenOnce<T>, N, [...Count, 1]>;
-
-type a = FlattenDepth<[1, 2, [3, 4], [[[5]]]], 2>; // [1, 2, 3, 4, [5]]. flattern 2 times
-type b = FlattenDepth<[1, 2, [3, 4], [[[5]]]]>; // [1, 2, 3, 4, [[5]]]. Depth defaults to be 1
-type c = FlattenDepth<[1, 2, 3, 4]>;
+type case1 = IsUnion<string>; // false
+type case2 = IsUnion<string | number>; // true
+type case3 = IsUnion<[string | number]>; // false
