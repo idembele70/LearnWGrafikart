@@ -8,8 +8,22 @@ type Expect<T extends true> = T;
 
 // Exercice
 
-type IsUnion<T, C = T> = T extends C ? ([C] extends [T] ? "in" : true) : false;
+const tree1 = {
+  val: 1,
+  left: null,
+  right: {
+    val: 2,
+    left: {
+      val: 3,
+      left: null,
+      right: null,
+    },
+    right: null,
+  },
+} as const
 
-type case1 = IsUnion<string>; // false
-type case2 = IsUnion<string | number>; // true
-type case3 = IsUnion<[string | number]>; // false
+type InorderTraversal< T> = {
+  [key in keyof T as ]:T[Key]
+}
+
+type A = InorderTraversal<typeof tree1> // [1, 3, 2]
