@@ -7,19 +7,14 @@ type Equal<T, U> = <V>() => (V extends T ? 1 : 2) extends <V>() => V extends U
 type Expect<T extends true> = T;
 
 // Exercice
-interface Todo {
-  title: string;
-  description: string;
-}
 
-type MyReadonly<T> = {
-  readonly [Key in keyof T]: T[Key];
+const fn = (v: boolean) => {
+  if (v) return 1;
+  else return 2;
 };
 
-const todo: MyReadonly<Todo> = {
-  title: "Hey",
-  description: "foobar",
-};
+type MyReturnType<F extends Function> = F extends (...args: any) => infer RT
+  ? RT
+  : never;
 
-todo.title = "Hello"; // Error: cannot reassign a readonly property
-todo.description = "barFoo"; // Error: cannot reassign a readonly property
+type a = MyReturnType<typeof fn>; // should be "1 | 2"
