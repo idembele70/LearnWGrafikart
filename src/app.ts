@@ -8,8 +8,21 @@ type Expect<T extends true> = T;
 
 // Exercice
 
-type MyCapitalize<S extends string> = S extends `${infer First}${infer Rest}`
-  ? `${Uppercase<First>}${Rest}`
-  : S;
+type foo = {
+  name: string;
+  age: string;
+};
+type coo = {
+  age: number;
+  sex: string;
+};
 
-type capitalized = MyCapitalize<"hello world">; // expected to be 'Hello world'
+type Merge<O, O1> = {
+  [Key in keyof (O & O1)]: Key extends keyof O1
+    ? O1[Key]
+    : Key extends keyof O
+    ? O[Key]
+    : never;
+};
+
+type Result = Merge<foo, coo>; // expected to be {name: string, age: number, sex: string}
