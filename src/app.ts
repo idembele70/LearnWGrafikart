@@ -7,22 +7,20 @@ type Equal<T, U> = <V>() => (V extends T ? 1 : 2) extends <V>() => V extends U
 type Expect<T extends true> = T;
 
 // Exercice
-
-type foo = {
-  name: string;
-  age: string;
+interface User {
+  name?: string;
+  age?: number;
+  address?: string;
+}
+type Merge<O> = {
+  [Key in keyof O]: O[Key];
 };
-type coo = {
-  age: number;
-  sex: string;
-};
+type RequiredByKeys<O, K> = Merge<
+  {
+    [Key in keyof O as Key extends K ? Key : never]-?: O[Key];
+  } & {
+    [Key in keyof O as Key extends K ? never : Key]: O[Key];
+  }
+>;
 
-type Merge<O, O1> = {
-  [Key in keyof (O & O1)]: Key extends keyof O1
-    ? O1[Key]
-    : Key extends keyof O
-    ? O[Key]
-    : never;
-};
-
-type Result = Merge<foo, coo>; // expected to be {name: string, age: number, sex: string}
+type UserRequiredName = RequiredByKeys<User, "name">; // { name: string; age?: number; address?: string }
