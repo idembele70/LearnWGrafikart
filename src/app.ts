@@ -8,8 +8,16 @@ type Expect<T extends true> = T;
 
 // Exercice
 
-type IsUnion<T, C = T> = T extends C ? ([C] extends [T] ? false : true) : false;
+interface Model {
+  name: string;
+  age: number;
+  locations: string[] | null;
+}
 
-type case1 = IsUnion<string>; // false
-type case2 = IsUnion<string | number>; // true
-type case3 = IsUnion<[string | number]>; // false
+type ObjectEntries<O> = {
+  [Key in keyof O]: [Key, O[Key] extends infer R | undefined ? R : O[Key]];
+}[keyof O];
+
+type modelEntries = ObjectEntries<Model>; // ['name', string] | ['age', number] | ['locations', string[] | null];
+type modelEntriess = ObjectEntries<{ key?: undefined }>; // ['name', string] | ['age', number] | ['locations', string[] | null];
+type modelEntriesss = ObjectEntries<Partial<Model>>; // ['name', string] | ['age', number] | ['locations', string[] | null];
