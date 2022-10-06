@@ -8,16 +8,9 @@ type Expect<T extends true> = T;
 
 // Exercice
 
-interface Model {
-  name: string;
-  age: number;
-  locations: string[] | null;
-}
+// your answers
+type IsTuple<T> = T extends readonly [any] | [any] ? true : false;
 
-type ObjectEntries<O> = {
-  [Key in keyof O]: [Key, O[Key] extends infer R | undefined ? R : O[Key]];
-}[keyof O];
-
-type modelEntries = ObjectEntries<Model>; // ['name', string] | ['age', number] | ['locations', string[] | null];
-type modelEntriess = ObjectEntries<{ key?: undefined }>; // ['name', string] | ['age', number] | ['locations', string[] | null];
-type modelEntriesss = ObjectEntries<Partial<Model>>; // ['name', string] | ['age', number] | ['locations', string[] | null];
+type case1 = IsTuple<[number, string]>; // true
+type case2 = IsTuple<readonly [number]>; // true
+type case3 = IsTuple<number[]>; // false
