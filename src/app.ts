@@ -8,10 +8,8 @@ type Expect<T extends true> = T;
 
 // Exercice
 
-type Permutation<U, C = U> = [U] extends [never]
-  ? []
-  : C extends infer R
-  ? [C, ...Permutation<Exclude<U, C>>]
-  : [];
+type IsUnion<T, C = T> = T extends C ? ([C] extends [T] ? false : true) : false;
 
-type perm = Permutation<"A" | "B" | "C">; // ['A', 'B', 'C'] | ['A', 'C', 'B'] | ['B', 'A', 'C'] | ['B', 'C', 'A'] | ['C', 'A', 'B'] | ['C', 'B', 'A']
+type case1 = IsUnion<string>; // false
+type case2 = IsUnion<string | number>; // true
+type case3 = IsUnion<[string | number]>; // false
