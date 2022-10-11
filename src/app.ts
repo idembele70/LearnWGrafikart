@@ -8,9 +8,10 @@ type Expect<T extends true> = T;
 
 // Exercice
 
-// your answers
-type IsTuple<T> = T extends readonly [any] | [any] ? true : false;
+type Permutation<U, C = U> = [U] extends [never]
+  ? []
+  : C extends infer R
+  ? [C, ...Permutation<Exclude<U, C>>]
+  : [];
 
-type case1 = IsTuple<[number, string]>; // true
-type case2 = IsTuple<readonly [number]>; // true
-type case3 = IsTuple<number[]>; // false
+type perm = Permutation<"A" | "B" | "C">; // ['A', 'B', 'C'] | ['A', 'C', 'B'] | ['B', 'A', 'C'] | ['B', 'C', 'A'] | ['C', 'A', 'B'] | ['C', 'B', 'A']
