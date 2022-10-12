@@ -8,8 +8,25 @@ type Expect<T extends true> = T;
 
 // Exercice
 
-type IsUnion<T, C = T> = T extends C ? ([C] extends [T] ? false : true) : false;
+type NumberToTuple<T extends number, A extends 4[] = []> = A["length"] extends T
+  ? A
+  : NumberToTuple<T, [...A, 4]>;
 
-type case1 = IsUnion<string>; // false
-type case2 = IsUnion<string | number>; // true
-type case3 = IsUnion<[string | number]>; // false
+type Plus<T extends number, U extends number> = [
+  ...NumberToTuple<T>,
+  ...NumberToTuple<U>
+]["length"] &
+  number;
+type Fibonacci<
+  N extends number,
+  start extends number = 2,
+  Current extends number = 1,
+  Prev extends number = 0
+> = N extends 0 | 1
+  ? 1
+  : N extends start
+  ? Plus<Current, Prev>
+  : Fibonacci<N, Plus<start, 1>, Plus<Prev, Current>, Current>;
+
+type Result1 = Fibonacci<3>; // 2
+type Result2 = Fibonacci<8>; // 21
