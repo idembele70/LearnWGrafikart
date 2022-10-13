@@ -8,25 +8,50 @@ type Expect<T extends true> = T;
 
 // Exercice
 
-type NumberToTuple<T extends number, A extends 4[] = []> = A["length"] extends T
+type NumberToTuple<T extends number, A extends 1[] = []> = A["length"] extends T
   ? A
-  : NumberToTuple<T, [...A, 4]>;
+  : NumberToTuple<T, [...A, 1]>;
 
 type Plus<T extends number, U extends number> = [
   ...NumberToTuple<T>,
   ...NumberToTuple<U>
 ]["length"] &
   number;
-type Fibonacci<
-  N extends number,
-  start extends number = 2,
-  Current extends number = 1,
-  Prev extends number = 0
-> = N extends 0 | 1
-  ? 1
-  : N extends start
-  ? Plus<Current, Prev>
-  : Fibonacci<N, Plus<start, 1>, Plus<Prev, Current>, Current>;
 
-type Result1 = Fibonacci<3>; // 2
-type Result2 = Fibonacci<8>; // 21
+type MinusOne<T extends number> = NumberToTuple<T> extends [any, ...infer Rest]
+  ? Rest["length"]
+  : 0;
+
+type GreatherOrEqual<T extends number, U extends number> = T extends U
+  ? true
+  : T extends 0
+  ? false
+  : U extends 0
+  ? true
+  : GreatherOrEqual<MinusOne<T>, MinusOne<U>>;
+
+type Greater<T extends number, U extends number> = T extends 0
+  ? false
+  : U extends 0
+  ? true
+  : Greater<MinusOne<T>, MinusOne<U>>;
+
+type A = GreatherOrEqual<1, 1>;
+
+type Fill<
+  T extends any[],
+  N,
+  Start extends number = 0,
+  End extends number = T["length"],
+  Idx extends number = 0
+> = GreatherOrEqual<Start, End> extends true
+  ? T
+  : T extends [infer First, ...infer Rest]
+  ? GreatherOrEqual<Idx, Start> extends true
+    ? Greater<End, Idx> extends true
+      ? [N, ...Fill<Rest, N, Start, End, Plus<Idx, 1>>]
+      : [First, ...Fill<Rest, N, Start, End, Plus<Idx, 1>>]
+    : [First, ...Fill<Rest, N, Start, End, Plus<Idx, 1>>]
+  : [];
+
+type exp = Fill<[1, 2, 3], true, 1, 3>; // expected to be [1, true, true]
