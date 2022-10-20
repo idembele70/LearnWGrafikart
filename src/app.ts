@@ -8,10 +8,17 @@ type Expect<T extends true> = T;
 
 // Exercice
 
-type Permutation<T, C = T> = [T] extends [never]
-  ? []
-  : C extends C
-  ? [C, ...Permutation<Exclude<T, C>>]
-  : [];
+type StrToUnion<S extends string> = S extends `${infer First}${infer Rest}`
+  ? First | StrToUnion<Rest>
+  : S;
 
-type perm = Permutation<"A" | "B" | "C">; // ['A', 'B', 'C'] | ['A', 'C', 'B'] | ['B', 'A', 'C'] | ['B', 'C', 'A'] | ['C', 'A', 'B'] | ['C', 'B', 'A']
+type UniqueCombination<T, C = T> = [T] extends [never]
+  ? ""
+  : C extends string
+  ? `${C extends string ? C | "" : ""}${UniqueCombination<Exclude<T, C>>}`
+  : "";
+
+type AllCombinations<S extends string> = UniqueCombination<StrToUnion<S>>;
+
+type AllCombinations_ABC = AllCombinations<"ABC">;
+// should be '' | 'A' | 'B' | 'C' | 'AB' | 'AC' | 'BA' | 'BC' | 'CA' | 'CB' | 'ABC' | 'ACB' | 'BAC' | 'BCA' | 'CAB' | 'CBA'
