@@ -8,17 +8,15 @@ type Expect<T extends true> = T;
 
 // Exercice
 
-type StrToUnion<S extends string> = S extends `${infer First}${infer Rest}`
-  ? First | StrToUnion<Rest>
-  : S;
-
-type UniqueCombination<T, C = T> = [T] extends [never]
-  ? ""
-  : C extends string
-  ? `${C extends string ? C | "" : ""}${UniqueCombination<Exclude<T, C>>}`
-  : "";
-
-type AllCombinations<S extends string> = UniqueCombination<StrToUnion<S>>;
-
-type AllCombinations_ABC = AllCombinations<"ABC">;
-// should be '' | 'A' | 'B' | 'C' | 'AB' | 'AC' | 'BA' | 'BC' | 'CA' | 'CB' | 'ABC' | 'ACB' | 'BAC' | 'BCA' | 'CAB' | 'CBA'
+type Chunk<
+  A extends any[],
+  C extends number = 1,
+  L extends any[] = []
+> = L["length"] extends C
+  ? [L, ...Chunk<A, C>]
+  : A extends [infer First, ...infer Rest]
+  ? Chunk<Rest, C, [...L, First]>
+  : L;
+type exp1 = Chunk<[1, 2, 3], 2>; // expected to be [[1, 2], [3]]
+type exp2 = Chunk<[1, 2, 3], 4>; // expected to be [[1, 2, 3]]
+type exp3 = Chunk<[1, 2, 3], 1>; // expected to be [[1], [2], [3]]
