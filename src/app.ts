@@ -8,15 +8,20 @@ type Expect<T extends true> = T;
 
 // Exercice
 
-type Chunk<
-  A extends any[],
-  C extends number = 1,
-  L extends any[] = []
-> = L["length"] extends C
-  ? [L, ...Chunk<A, C>]
-  : A extends [infer First, ...infer Rest]
-  ? Chunk<Rest, C, [...L, First]>
-  : L;
-type exp1 = Chunk<[1, 2, 3], 2>; // expected to be [[1, 2], [3]]
-type exp2 = Chunk<[1, 2, 3], 4>; // expected to be [[1, 2, 3]]
-type exp3 = Chunk<[1, 2, 3], 1>; // expected to be [[1], [2], [3]]
+// expected to be string
+interface Todo {
+  title: string;
+  description: string;
+  completed: boolean;
+}
+
+type MyPick<O, U> = {
+  [Key in keyof O as Key extends U ? Key : never]: O[Key];
+};
+
+type TodoPreview = MyPick<Todo, "title" | "completed">;
+
+const todo: TodoPreview = {
+  title: "Clean room",
+  completed: false,
+};
