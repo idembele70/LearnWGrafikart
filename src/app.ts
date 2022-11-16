@@ -9,19 +9,7 @@ type Expect<T extends true> = T;
 // Exercice
 
 // expected to be string
-interface Todo {
-  title: string;
-  description: string;
-  completed: boolean;
-}
 
-type MyPick<O, U> = {
-  [Key in keyof O as Key extends U ? Key : never]: O[Key];
-};
+type Result = Push<[1, 2], "3">; // [1, 2, '3']
 
-type TodoPreview = MyPick<Todo, "title" | "completed">;
-
-const todo: TodoPreview = {
-  title: "Clean room",
-  completed: false,
-};
+type Push<A extends any[], T> = [...A, T];
