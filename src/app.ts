@@ -8,8 +8,13 @@ type Expect<T extends true> = T;
 
 // Exercice
 
-// expected to be string
+const fn = (v: boolean) => {
+  if (v) return 1;
+  else return 2;
+};
 
-type Result = Push<[1, 2], "3">; // [1, 2, '3']
+type MyReturnType<F extends Function> = F extends (arg: any) => infer RT
+  ? RT
+  : never;
 
-type Push<A extends any[], T> = [...A, T];
+type a = MyReturnType<typeof fn>; // should be "1 | 2"
