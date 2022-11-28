@@ -8,10 +8,15 @@ type Expect<T extends true> = T;
 
 // Exercice
 
-type arr1 = ["a", "b", "c", "d"];
-type arr2 = [3, 2, 1];
+type Replace<
+  S extends string,
+  From extends string,
+  To extends string
+> = From extends ""
+  ? S
+  : S extends `${infer Head}${From}${infer Tail}`
+  ? `${Head}${To}${Tail}`
+  : S;
 
-type Pop<A extends any[]> = A extends [...infer Firsts, any] ? Firsts : A;
-
-type re1 = Pop<arr1>; // expected to be ['a', 'b', 'c']
-type re2 = Pop<arr2>; // expected to be [3, 2]
+type replaced = Replace<"types are fun!", "fun", "awesome">; // expected to be 'types are awesome!'
+type replacedd = Replace<"foobarbar", "bar", "foo">; // expected to be 'types are awesome!'
