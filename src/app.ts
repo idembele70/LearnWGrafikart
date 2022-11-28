@@ -8,15 +8,14 @@ type Expect<T extends true> = T;
 
 // Exercice
 
-type Replace<
+type ReplaceAll<
   S extends string,
   From extends string,
   To extends string
 > = From extends ""
   ? S
   : S extends `${infer Head}${From}${infer Tail}`
-  ? `${Head}${To}${Tail}`
+  ? `${Head}${To}${ReplaceAll<Tail, From, To>}`
   : S;
 
-type replaced = Replace<"types are fun!", "fun", "awesome">; // expected to be 'types are awesome!'
-type replacedd = Replace<"foobarbar", "bar", "foo">; // expected to be 'types are awesome!'
+type replaced = ReplaceAll<"t y p e s", " ", "">; // expected to be 'types'
