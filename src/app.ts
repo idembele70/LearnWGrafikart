@@ -8,11 +8,10 @@ type Expect<T extends true> = T;
 
 // Exercice
 
-type LengthOfString<
-  S extends string,
-  A extends string[] = []
-> = S extends `${infer First}${infer Rest}`
-  ? LengthOfString<Rest, [...A, First]>
-  : A["length"];
+type flatten = Flatten<[1, 2, [3, 4], [[[5]]]]>; // [1, 2, 3, 4, 5]
 
-type A = LengthOfString<"Hello">;
+type Flatten<A extends any[]> = A extends [infer First, ...infer Rest]
+  ? First extends any[]
+    ? [...Flatten<First>, ...Flatten<Rest>]
+    : [First, ...Flatten<Rest>]
+  : A;
