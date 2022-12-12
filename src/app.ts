@@ -6,12 +6,51 @@ type Equal<T, U> = <V>() => (V extends T ? 1 : 2) extends <V>() => V extends U
   : false;
 type Expect<T extends true> = T;
 
-// Exercice
+//
 
-type flatten = Flatten<[1, 2, [3, 4], [[[5]]]]>; // [1, 2, 3, 4, 5]
+interface UppercaseChars {
+  A: "a";
+  B: "b";
+  C: "c";
+  D: "d";
+  E: "e";
+  F: "f";
+  G: "g";
+  H: "h";
+  I: "i";
+  J: "j";
+  K: "k";
+  L: "l";
+  M: "m";
+  N: "n";
+  O: "o";
+  P: "p";
+  Q: "q";
+  R: "r";
+  S: "s";
+  T: "t";
+  U: "u";
+  V: "v";
+  W: "w";
+  X: "x";
+  Y: "y";
+  Z: "z";
+}
 
-type Flatten<A extends any[]> = A extends [infer First, ...infer Rest]
-  ? First extends any[]
-    ? [...Flatten<First>, ...Flatten<Rest>]
-    : [First, ...Flatten<Rest>]
-  : A;
+type KebabCase<
+  S extends string,
+  isFirst = true
+> = S extends `${infer First}${infer Rest}`
+  ? First extends keyof UppercaseChars
+    ? `${isFirst extends true ? "" : "-"}${UppercaseChars[First]}${KebabCase<
+        Rest,
+        false
+      >}`
+    : `${First}${KebabCase<Rest, false>}`
+  : S;
+
+type FooBarBaz = KebabCase<"FooBarBaz">;
+const foobarbaz: FooBarBaz = "foo-bar-baz";
+
+type DoNothing = KebabCase<"do-nothing">;
+const doNothing: DoNothing = "do-nothing";
