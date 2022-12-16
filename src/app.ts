@@ -1,36 +1,18 @@
 // type challenges
-type NodeA = {
-  type: "A";
-  name: string;
-  flag: number;
+
+type Foo = {
+  [key: string]: any;
+  foo(): void;
 };
 
-type NodeB = {
-  type: "B";
-  id: number;
-  flag: number;
+type RemoveIndexSignature<T> = {
+  [Key in keyof T as string extends Key
+    ? never
+    : number extends Key
+    ? never
+    : symbol extends Key
+    ? never
+    : Key]: T[Key];
 };
 
-type NodeC = {
-  type: "C";
-  name: string;
-  flag: number;
-};
-
-type Nodes = NodeA | NodeB | NodeC;
-
-type ReplaceKeys<T, K, O> = {
-  [Key in keyof T]: Key extends K
-    ? Key extends keyof O
-      ? O[Key]
-      : never
-    : T[Key];
-};
-
-type ReplacedNodes = ReplaceKeys<
-  Nodes,
-  "name" | "flag",
-  { name: number; flag: string }
->; // {type: 'A', name: number, flag: string} | {type: 'B', id: number, flag: string} | {type: 'C', name: number, flag: string} // would replace name from string to number, replace flag from number to string.
-
-type ReplacedNotExistKeys = ReplaceKeys<Nodes, "name", { aa: number }>; // {type: 'A', name: never, flag: number} | NodeB | {type: 'C', name: never, flag: number} // would replace name to never
+type A = RemoveIndexSignature<Foo>; // expected { foo(): void }
