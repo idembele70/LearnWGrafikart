@@ -1,10 +1,9 @@
 // type challenges
 
-type a = StartsWith<"abc", "ac">; // expected to be false
-type b = StartsWith<"abc", "ab">; // expected to be true
-type c = StartsWith<"abc", "abcd">; // expected to be false
+type a = EndsWith<"abc", "bc">; // expected to be true
+type b = EndsWith<"abc", "abc">; // expected to be true
+type c = EndsWith<"abc", "d">; // expected to be false
 
-type StartsWith<
-  S extends string,
-  Start extends string
-> = S extends `${Start}${any}` ? true : false;
+type EndsWith<S extends string, End extends string> = S extends `${any}${End}`
+  ? true
+  : false;
