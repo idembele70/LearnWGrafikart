@@ -1,15 +1,10 @@
 // type challenges
 
-type OnlyBoolean = PickByType<
-  {
-    name: string;
-    count: number;
-    isReadonly: boolean;
-    isEnable: boolean;
-  },
-  boolean
->; // { isReadonly: boolean; isEnable: boolean; }
+type a = StartsWith<"abc", "ac">; // expected to be false
+type b = StartsWith<"abc", "ab">; // expected to be true
+type c = StartsWith<"abc", "abcd">; // expected to be false
 
-type PickByType<O, T> = {
-  [Key in keyof O as O[Key] extends T ? Key : never]: O[Key];
-};
+type StartsWith<
+  S extends string,
+  Start extends string
+> = S extends `${Start}${any}` ? true : false;
