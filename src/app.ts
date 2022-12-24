@@ -1,18 +1,15 @@
 // type challenges
 
-type Foo = {
-  [key: string]: any;
-  foo(): void;
-};
+type OnlyBoolean = PickByType<
+  {
+    name: string;
+    count: number;
+    isReadonly: boolean;
+    isEnable: boolean;
+  },
+  boolean
+>; // { isReadonly: boolean; isEnable: boolean; }
 
-type RemoveIndexSignature<T> = {
-  [Key in keyof T as string extends Key
-    ? never
-    : number extends Key
-    ? never
-    : symbol extends Key
-    ? never
-    : Key]: T[Key];
+type PickByType<O, T> = {
+  [Key in keyof O as O[Key] extends T ? Key : never]: O[Key];
 };
-
-type A = RemoveIndexSignature<Foo>; // expected { foo(): void }
