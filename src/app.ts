@@ -1,9 +1,15 @@
 // type challenges
 
-type a = EndsWith<"abc", "bc">; // expected to be true
-type b = EndsWith<"abc", "abc">; // expected to be true
-type c = EndsWith<"abc", "d">; // expected to be false
+interface User {
+  name: string;
+  age: number;
+  address: string;
+}
+type RemoveUndefined<T, K extends keyof T> = T[K] extends infer R | undefined ? R : T[K]
+type PartialByKeys<O, K extends string> = {
+  [Key in keyof O as Key extends K ? Key : never]?: RemoveUndefined<O, Key>;
+} & {
+    [Key in keyof O as Key extends K ? never : Key]: O[Key];
+  };
 
-type EndsWith<S extends string, End extends string> = S extends `${any}${End}`
-  ? true
-  : false;
+type UserPartialName = PartialByKeys<User, "name">; // { name?:string; age:number; address:string }
