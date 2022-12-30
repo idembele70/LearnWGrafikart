@@ -1,13 +1,12 @@
 // type challenges
 
-interface Todo {
-  readonly title: string
-  readonly description: string
-  readonly completed: boolean
+type OmitByType<O, T> = {
+  [Key in keyof O as O[Key] extends T ? never : Key]: O[Key]
 }
 
-type Mutable<O extends object> = {
-  -readonly [Key in keyof O]: O[Key]
-}
-
-type MutableTodo = Mutable<Todo> // { title: string; description: string; completed: boolean; }
+type OmitBoolean = OmitByType<{
+  name: string
+  count: number
+  isReadonly: boolean
+  isEnable: boolean
+}, boolean> // { name: string; count: number }
