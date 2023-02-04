@@ -25,3 +25,4 @@ type InorderTraversal<T extends TreeNode | null> =
   [...Traversal<T, "left">, T["val"], ...Traversal<T, "right">] : []
 
 type A = InorderTraversal<typeof tree1> // [1, 3, 2]
+type B = InorderTraversal<typeof tree1> // [1, 3, 2]
