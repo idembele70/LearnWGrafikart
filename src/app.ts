@@ -1,28 +1,8 @@
 // type challenges
-
-const tree1 = {
-  val: 1,
-  left: null,
-  right: {
-    val: 2,
-    left: {
-      val: 3,
-      left: null,
-      right: null,
-    },
-    right: null,
-  },
-} as const
-interface TreeNode {
-  val: number;
-  left: TreeNode | null;
-  right: TreeNode | null;
-}
-type Traversal<T, U extends keyof T> =
-  T[U] extends TreeNode ? InorderTraversal<T[U]> : []
-type InorderTraversal<T extends TreeNode | null> =
-  T extends TreeNode ?
-  [...Traversal<T, "left">, T["val"], ...Traversal<T, "right">] : []
-
-type A = InorderTraversal<typeof tree1> // [1, 3, 2]
-type B = InorderTraversal<typeof tree1> // [1, 3, 2]
+type Flip<O> =
+  {
+    [Key in keyof O as `${O[Key] extends string | number | boolean ? O[Key] : never}`]: Key
+  }
+type a = Flip<{ a: "x", b: "y", c: "z" }>; // {x: 'a', y: 'b', z: 'c'}
+type b = Flip<{ a: 1, b: 2, c: 3 }>; // {1: 'a', 2: 'b', 3: 'c'}
+type c = Flip<{ a: false, b: true }>; // {false: 'a', true: 'b'}
