@@ -22,6 +22,6 @@ type Traversal<T, U extends keyof T> =
   T[U] extends TreeNode ? InorderTraversal<T[U]> : []
 type InorderTraversal<T extends TreeNode | null> =
   T extends TreeNode ?
-  [...Traversal<T, "left">, T["val"], ...Traversal<T, "right">] : T
+  [...Traversal<T, "left">, T["val"], ...Traversal<T, "right">] : []
 
 type A = InorderTraversal<typeof tree1> // [1, 3, 2]
